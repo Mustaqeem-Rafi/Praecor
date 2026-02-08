@@ -1,36 +1,136 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Praecor
+
+**AI-Powered Predictive Patient Deterioration System**
+
+A Next.js prototype demonstrating how real-time vital sign analysis can detect early signs of clinical deterioration (sepsis, cardiac arrest) before traditional monitoring systems trigger alerts.
+
+---
+
+## Features
+
+### 🏥 Live Dashboard
+- Real-time vital sign simulation with ECG waveforms
+- Heart Rate, Blood Pressure, and O2 Saturation monitoring
+- Predictive risk scoring with visual alerts
+
+### 🧠 Interactive Architecture Visualization
+An educational, interactive simulation of the backend intelligence pipeline:
+
+| Stage | Technology | Function |
+|-------|------------|----------|
+| **Data Ingestion** | Kafka Stream | Buffers 100Hz sensor data via FHIR |
+| **Normalization** | Kalman Filter | Removes sensor noise, estimates true physiological state |
+| **Temporal Analysis** | Drift Detection | Computes vital sign velocity over sliding windows |
+| **Risk Engine** | Bayesian Inference | Calculates posterior probability of sepsis |
+| **Clinical Action** | Sepsis Protocol | Triggers EMR alerts when risk exceeds threshold |
+
+**Interactive Features:**
+- **Scenario Toggle**: Switch between "Stable Patient" and "Sepsis Onset" simulations
+- **Live Data Flow**: Watch data packets traverse the pipeline with real-time processing
+- **Hover Insights**: Educational tooltips explain each algorithm's logic
+- **Global Alert System**: Screen visuals shift from calm blue → amber warning → red critical
+
+---
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS 4 |
+| Animations | Framer Motion |
+| Charts | Recharts |
+| Icons | Lucide React |
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone <repository-url>
+cd av_project
+
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+app/
+├── architecture/        # Interactive pipeline visualization
+│   └── page.tsx
+├── components/          # Reusable UI components
+│   ├── Dashboard.tsx
+│   ├── Navbar.tsx
+│   ├── PredictiveMonitor.tsx
+│   └── ShowcaseNarrator.tsx
+├── data/
+│   └── patient_scenarios.ts   # Deterministic vital sign datasets
+├── hooks/
+│   └── useVitalSimulator.ts   # Real-time data simulation hook
+├── lib/
+│   └── algorithms.ts          # Kalman Filter, Bayesian Network, Drift Detector
+└── page.tsx             # Main dashboard
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## Algorithms
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Kalman Filter
+Recursive state estimation that separates true physiological signals from sensor noise (movement artifacts, electrical interference).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Bayesian Inference
+Computes the posterior probability of sepsis using:
+- Prior probability (baseline population risk)
+- Likelihood functions for HR and MAP given health state
+- Combines evidence from multiple vital sign channels
+
+### Drift Detection
+Calculates the slope of vital signs over a sliding window to detect subtle physiological drift before absolute thresholds are breached.
+
+---
+
+## Current Phase: Prototype v0.1.0
+
+This is a **demonstration prototype** intended for:
+- Stakeholder presentations
+- Investor pitches
+- Technical architecture education
+
+**Not intended for clinical use.**
+
+---
+
+## License
+
+Proprietary - All Rights Reserved
+
+---
+
+## Author
+
+Built by Rafi
